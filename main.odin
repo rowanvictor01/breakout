@@ -15,8 +15,11 @@ main :: proc()
     raylib.InitWindow(W_WIDTH, W_HEIGHT, W_TITLE)
     
     // Paddle
-    player_paddle := entities.paddle_create(entities.Entity{W_WIDTH/2, W_HEIGHT/2, 50, 20, raylib.WHITE},
+    player_paddle := entities.paddle_create(entities.Entity{x=W_WIDTH/2, y=W_HEIGHT/2, width=50, height=20, color=raylib.WHITE},
 					    300)
+
+    // Ball
+    ball := entities.ball_create(entities.Entity{x=400, y=300, color=raylib.WHITE}, 12, 300, 300)
     
     // Game Loop
     for !raylib.WindowShouldClose()
@@ -29,6 +32,8 @@ main :: proc()
 	raylib.ClearBackground(raylib.BLACK)
 	
 	entities.paddle_draw(&player_paddle)
+	entities.ball_draw(&ball)
+
 	raylib.EndDrawing()
     }
 
