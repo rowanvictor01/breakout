@@ -1,4 +1,4 @@
-package breakout
+package init
 
 import "vendor:raylib"
 
@@ -10,8 +10,8 @@ PADDLE_WIDTH :: 100
 PADDLE_HEIGHT :: 18
 PADDLE_COLOR :: raylib.WHITE
 PADDLE_VEL_X :: 300
-INIT_PADDLE_X :: (W_WIDTH - PADDLE_WIDTH) / 2
-INIT_PADDLE_Y :: W_HEIGHT - 50
+INIT_PADDLE_X :: (WIN_WIDTH - PADDLE_WIDTH) / 2
+INIT_PADDLE_Y :: WIN_HEIGHT - 50
 
 
 /*
