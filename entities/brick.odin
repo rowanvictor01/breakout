@@ -84,13 +84,10 @@ bricks_create :: proc() -> [8][14]Brick
 
 bricks_draw :: proc(bricks: ^[8][14]Brick)
 {
-    count: int
     for o in 0 ..< int(len(bricks))
     {
 	for i in 0 ..< int(len(bricks[0]))
 	{
-	    count += 1
-	    fmt.printfln("Brick %d X Coordinate: %f", count, bricks[o][i].x)
 	    raylib.DrawRectangle(i32(bricks[o][i].x),
 				 i32(bricks[o][i].y),
 				 i32(bricks[o][i].width),

@@ -6,19 +6,18 @@ import "entities"
 
 main :: proc()
 {
-    // Window Constants
-    W_WIDTH :: 800
-    W_HEIGHT :: 600
-    W_TITLE :: "Breakout"
-    
     // Create Window
     raylib.InitWindow(W_WIDTH, W_HEIGHT, W_TITLE)
     
     // Paddle
-    player_paddle := entities.paddle_create(entities.Entity{x=W_WIDTH/2, y=W_HEIGHT/2, width=50, height=20, color=raylib.WHITE},
-					    300)
+    player_paddle := entities.paddle_create(entities.Entity{x=INIT_PADDLE_X,
+							    y=INIT_PADDLE_Y,
+							    width=PADDLE_WIDTH,
+							    height=PADDLE_HEIGHT,
+							    color=PADDLE_COLOR}, PADDLE_VEL_X)
+
     // Ball
-    ball := entities.ball_create(entities.Entity{x=400, y=300, color=raylib.WHITE}, 12, 300, 300)
+    ball := entities.ball_create(entities.Entity{x=BALL_X, y=BALL_Y, color=BALL_COLOR}, BALL_RADIUS, BALL_VEL, BALL_VEL)
     
     // Bricks
     bricks := entities.bricks_create()
