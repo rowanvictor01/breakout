@@ -30,7 +30,12 @@ ball_create :: proc(base: Entity, radius: u16, vel: f32) -> Ball
 
 ball_update :: proc(self: ^Ball)
 {
-    self.y = self.y - self.vy * raylib.GetFrameTime()
+    // Checks for launching ball on startup with the space key
+    if raylib.IsKeyPressed(raylib.KeyboardKey.SPACE) && !self.is_active {self.is_active = true}
+    if !self.is_active {return}
+
+    self.x = self.x + self.vx * raylib.GetFrameTime()
+    self.y = self.y + self.vy * raylib.GetFrameTime()
 }
 
 ball_draw :: proc(self: ^Ball)
