@@ -27,6 +27,7 @@ main :: proc()
     {
 	// Update States
 	entities.paddle_update(&player_paddle)
+	entities.ball_update(&ball)
 
 	// Draw
 	raylib.BeginDrawing()

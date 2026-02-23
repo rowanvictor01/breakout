@@ -9,6 +9,7 @@ Ball :: struct
     r: u16,
     vx: f32,
     vy: f32,
+    is_active: bool,
 }
 
 
@@ -21,9 +22,15 @@ ball_create :: proc(base: Entity, radius: u16, vel: f32) -> Ball
 	r = radius,
 	vx = 0,
 	vy = vel,
+	is_active = false,
     }
 
     return ball
+}
+
+ball_update :: proc(self: ^Ball)
+{
+    self.y = self.y - self.vy * raylib.GetFrameTime()
 }
 
 ball_draw :: proc(self: ^Ball)
