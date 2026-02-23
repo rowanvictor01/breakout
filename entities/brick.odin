@@ -96,3 +96,24 @@ bricks_draw :: proc(bricks: ^[8][14]Brick)
 	}
     }
 }
+
+bricks_get_bounds :: proc(bricks: ^[8][14]Brick) -> [8][14]raylib.Rectangle
+{
+    bricks_bounds: [8][14]raylib.Rectangle
+    
+    for o in 0 ..< len(bricks)
+    {
+	for i in 0 ..< len(bricks[0])
+	{
+	    bounds: raylib.Rectangle =
+	    {
+		x = f32(bricks[o][i].x),
+		y = f32(bricks[o][i].y),
+		width = f32(bricks[o][i].width),
+		height = f32(bricks[o][i].height),
+	    }
+	    bricks_bounds[o][i] = bounds
+	}
+    }
+    return bricks_bounds
+}
