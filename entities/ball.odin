@@ -7,20 +7,20 @@ Ball :: struct
 {
     using base: Entity,
     r: u16,
-    vx: u16,
-    vy: u16,
+    vx: f32,
+    vy: f32,
 }
 
 
-ball_create :: proc(base: Entity, radius: u16, vel_x: u16, vel_y: u16) -> Ball
+ball_create :: proc(base: Entity, radius: u16, vel: f32) -> Ball
 {
     ball: Ball = {
 	x = base.x,
 	y = base.y,
 	color = base.color,
 	r = radius,
-	vx = vel_x,
-	vy = vel_y,
+	vx = 0,
+	vy = vel,
     }
 
     return ball

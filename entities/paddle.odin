@@ -6,11 +6,11 @@ import "vendor:raylib"
 Paddle :: struct
 {
     using base: Entity,
-    vx: u16,
+    vx: f32,
 }
 
 
-paddle_create :: proc(base: Entity, vel_x: u16) -> Paddle
+paddle_create :: proc(base: Entity, vel_x: f32) -> Paddle
 {
     paddle: Paddle = {
 	x = base.x,
@@ -29,11 +29,11 @@ paddle_update :: proc(self: ^Paddle)
     // Detect input and update state
     if raylib.IsKeyDown(raylib.KeyboardKey.A)
     {
-	self.x = self.x - f32(self.vx) * raylib.GetFrameTime()
+	self.x = self.x - self.vx * raylib.GetFrameTime()
     }
     if raylib.IsKeyDown(raylib.KeyboardKey.D)
     {
-	self.x = self.x + f32(self.vx) * raylib.GetFrameTime()
+	self.x = self.x + self.vx * raylib.GetFrameTime()
     }
 }
 

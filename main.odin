@@ -17,7 +17,7 @@ main :: proc()
 							    color=PADDLE_COLOR}, PADDLE_VEL_X)
 
     // Ball
-    ball := entities.ball_create(entities.Entity{x=BALL_X, y=BALL_Y, color=BALL_COLOR}, BALL_RADIUS, BALL_VEL, BALL_VEL)
+    ball := entities.ball_create(entities.Entity{x=BALL_X, y=BALL_Y, color=BALL_COLOR}, BALL_RADIUS, BALL_VEL)
     
     // Bricks
     bricks := entities.bricks_create()
