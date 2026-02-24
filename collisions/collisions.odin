@@ -40,11 +40,11 @@ collision_ball_border :: proc(ball: ^entities.Ball)
 	// bounce
 	ball.vy = -ball.vy
     }
-    if get_ball_bottom(ball) >= BORDER_BOTTOM
-    {
-	ball.y = f32(BORDER_BOTTOM - ball.r)
-	ball.vy = -ball.vy
-    }
+    // if get_ball_bottom(ball) >= BORDER_BOTTOM
+    // {
+    // 	ball.y = f32(BORDER_BOTTOM - ball.r)
+    // 	ball.vy = -ball.vy
+    // }
     if get_ball_left(ball) <= BORDER_LEFT
     {
 	ball.x = f32(BORDER_LEFT + ball.r)
@@ -59,5 +59,13 @@ collision_ball_border :: proc(ball: ^entities.Ball)
 
 collision_paddle_ball :: proc(paddle: ^entities.Paddle, ball: ^entities.Ball)
 {
-    //code
+    center: raylib.Vector2
+    center[0] = ball.x
+    center[1] = ball.y
+
+    if raylib.CheckCollisionCircleRec(center, f32(ball.r), entities.paddle_get_bounds(paddle))
+    {
+	ball.y = get_paddle_top(paddle) - f32(ball.r)
+	ball.vy = -ball.vy
+    }
 }
