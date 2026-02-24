@@ -33,6 +33,7 @@ main :: proc()
 	
 	// Collision Checks
 	collisions.collision_paddle_border(&player_paddle)
+	collisions.collision_ball_border(&ball)
 
 	// Draw
 	raylib.BeginDrawing()
