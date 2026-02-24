@@ -23,6 +23,11 @@ get_ball_right :: proc(b: ^entities.Ball) -> f32 {return b.x + f32(b.r)}
 get_ball_top :: proc(b: ^entities.Ball) -> f32 {return b.y - f32(b.r)}
 get_ball_bottom :: proc(b: ^entities.Ball) -> f32 {return b.y + f32(b.r)}
 
+get_brick_left :: proc(b: ^entities.Brick) -> f32 {return b.x}
+get_brick_right :: proc(b: ^entities.Brick) -> f32 {return b.x + f32(b.width)}
+get_brick_top :: proc(b: ^entities.Brick) -> f32 {return b.y}
+get_brick_bottom :: proc(b: ^entities.Brick) -> f32 {return b.y + f32(b.height)}
+
 
 collision_paddle_border :: proc(paddle: ^entities.Paddle)
 {
@@ -68,4 +73,8 @@ collision_paddle_ball :: proc(paddle: ^entities.Paddle, ball: ^entities.Ball)
 	ball.y = get_paddle_top(paddle) - f32(ball.r)
 	ball.vy = -ball.vy
     }
+}
+
+collision_bricks_ball :: proc(bricks: ^[8][14]entities.Brick, ball: ^entities.Ball)
+{
 }
