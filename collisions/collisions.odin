@@ -1,7 +1,6 @@
 package collisions
 
 import "vendor:raylib"
-import "core:fmt"
 
 import "../entities"
 import "../init"
@@ -24,10 +23,10 @@ get_ball_top :: proc(b: ^entities.Ball) -> f32 {return b.y - f32(b.r)}
 get_ball_bottom :: proc(b: ^entities.Ball) -> f32 {return b.y + f32(b.r)}
 get_ball_center :: proc(b: ^entities.Ball) -> raylib.Vector2 {center: raylib.Vector2; center[0] = b.x; center[1] = b.y; return center}
 
-get_brick_left :: proc(b: ^entities.Brick) -> f32 {return b.x}
-get_brick_right :: proc(b: ^entities.Brick) -> f32 {return b.x + f32(b.width)}
-get_brick_top :: proc(b: ^entities.Brick) -> f32 {return b.y}
-get_brick_bottom :: proc(b: ^entities.Brick) -> f32 {return b.y + f32(b.height)}
+get_brick_left :: proc(b: entities.Brick) -> f32 {return b.x}
+get_brick_right :: proc(b: entities.Brick) -> f32 {return b.x + f32(b.width)}
+get_brick_top :: proc(b: entities.Brick) -> f32 {return b.y}
+get_brick_bottom :: proc(b: entities.Brick) -> f32 {return b.y + f32(b.height)}
 
 
 collision_paddle_border :: proc(paddle: ^entities.Paddle)
@@ -74,4 +73,18 @@ collision_paddle_ball :: proc(paddle: ^entities.Paddle, ball: ^entities.Ball)
 
 collision_bricks_ball :: proc(bricks: ^[8][14]entities.Brick, ball: ^entities.Ball)
 {
+    bricks_bounds := entities.bricks_get_bounds(bricks)
+
+    for o in 0 ..< len(bricks)
+    {
+	for i in 0 ..< len(bricks[0])
+	{
+	    if raylib.CheckCollisionCircleRec(get_ball_center(ball), f32(ball.r), bricks_bounds[o][i]) && bricks[o][i].is_active
+	    {
+		bricks[o][i].is_active = false
+	     	ball.y = get_brick_bottom(bricks[o][i]) + f32(ball.r)
+	    	ball.vy = -ball.vy
+	    }
+	}
+    }
 }

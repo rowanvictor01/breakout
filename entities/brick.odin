@@ -88,6 +88,7 @@ bricks_draw :: proc(bricks: ^[8][14]Brick)
     {
 	for i in 0 ..< int(len(bricks[0]))
 	{
+	    if !bricks[o][i].is_active {continue}
 	    raylib.DrawRectangle(i32(bricks[o][i].x),
 				 i32(bricks[o][i].y),
 				 i32(bricks[o][i].width),

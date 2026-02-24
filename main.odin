@@ -35,6 +35,7 @@ main :: proc()
 	collisions.collision_paddle_border(&player_paddle)
 	collisions.collision_ball_border(&ball)
 	collisions.collision_paddle_ball(&player_paddle, &ball)
+	collisions.collision_bricks_ball(&bricks, &ball)
 
 	// Draw
 	raylib.BeginDrawing()
