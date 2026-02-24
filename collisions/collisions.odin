@@ -16,6 +16,7 @@ get_paddle_left :: proc(p: ^entities.Paddle) -> f32 {return p.x}
 get_paddle_right :: proc(p: ^entities.Paddle) -> f32 {return p.x + f32(p.width)}
 get_paddle_top :: proc(p: ^entities.Paddle) -> f32 {return p.y}
 get_paddle_bottom :: proc(p: ^entities.Paddle) -> f32 {return p.y + f32(p.height)}
+get_paddle_center_x :: proc(p: ^entities.Paddle) -> f32 {return p.x + f32(p.width / 2)}
 
 get_ball_left :: proc(b: ^entities.Ball) -> f32 {return b.x - f32(b.r)}
 get_ball_right :: proc(b: ^entities.Ball) -> f32 {return b.x + f32(b.r)}
@@ -66,8 +67,8 @@ collision_paddle_ball :: proc(paddle: ^entities.Paddle, ball: ^entities.Ball)
 {
     if raylib.CheckCollisionCircleRec(get_ball_center(ball), f32(ball.r), entities.paddle_get_bounds(paddle))
     {
-	ball.y = get_paddle_top(paddle) - f32(ball.r)
-	ball.vy = -ball.vy
+	ball.y = get_paddle_top(paddle) - f32(ball.r)  // [FIX]: Detect first from which side ball hit paddle before correcting
+	ball.vx, ball.vy = calc_paddle_bounce(paddle, ball)
     }
 }
 
