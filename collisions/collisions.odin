@@ -22,6 +22,7 @@ get_ball_left :: proc(b: ^entities.Ball) -> f32 {return b.x - f32(b.r)}
 get_ball_right :: proc(b: ^entities.Ball) -> f32 {return b.x + f32(b.r)}
 get_ball_top :: proc(b: ^entities.Ball) -> f32 {return b.y - f32(b.r)}
 get_ball_bottom :: proc(b: ^entities.Ball) -> f32 {return b.y + f32(b.r)}
+get_ball_center :: proc(b: ^entities.Ball) -> raylib.Vector2 {center: raylib.Vector2; center[0] = b.x; center[1] = b.y; return center}
 
 get_brick_left :: proc(b: ^entities.Brick) -> f32 {return b.x}
 get_brick_right :: proc(b: ^entities.Brick) -> f32 {return b.x + f32(b.width)}
@@ -64,11 +65,7 @@ collision_ball_border :: proc(ball: ^entities.Ball)
 
 collision_paddle_ball :: proc(paddle: ^entities.Paddle, ball: ^entities.Ball)
 {
-    center: raylib.Vector2
-    center[0] = ball.x
-    center[1] = ball.y
-
-    if raylib.CheckCollisionCircleRec(center, f32(ball.r), entities.paddle_get_bounds(paddle))
+    if raylib.CheckCollisionCircleRec(get_ball_center(ball), f32(ball.r), entities.paddle_get_bounds(paddle))
     {
 	ball.y = get_paddle_top(paddle) - f32(ball.r)
 	ball.vy = -ball.vy
